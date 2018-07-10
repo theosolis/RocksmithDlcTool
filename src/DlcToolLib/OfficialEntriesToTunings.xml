@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RemapOfficialEntries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Entries>
+		<Entry>
+			<Song>Bold As Love</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Castles Made Of Sand</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Fire</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Foxey Lady</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>If 6 was 9</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Little Wing</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Manic Depression</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Purple Haze</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Red House</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>The Wind Cries Mary</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Voodoo Child (Slight Return)</Song>
+			<Artist>Jimi Hendrix</Artist>
+			<NewArtist>The Jimi Hendrix Experience</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Blonde, Bad, and Beautiful</Song>
+			<Artist>Airbourne</Artist>
+			<NewSong>Blonde, Bad and Beautiful</NewSong>
+		</Entry>
+		<Entry>
+			<Song>Emerald</Song>
+			<Artist>The George Baker Selection</Artist>
+			<NewSong>Little Green Bag</NewSong>
+		</Entry>
+		<Entry>
+			<Song>White Wedding Part 1</Song>
+			<Artist>Bily Idol</Artist>
+			<NewArtist>Billy Idol</NewArtist>
+			<NewSong>White Wedding - Part 1</NewSong>
+		</Entry>
+		<Entry>
+			<Song>Blaze of Glory</Song>
+			<Artist>Bon Jovi</Artist>
+			<NewArtist>Jon Bon Jovi</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Metropolis, Pt. 1: The Miracle and The Sleeper</Song>
+			<Artist>Dream Theater</Artist>
+			<NewSong>Metropolis Part I: "The Miracle and the Sleeper"</NewSong>
+		</Entry>
+		<Entry>
+			<Artist>Stevie Ray Vaughan</Artist>
+			<NewArtist>Stevie Ray Vaughan &amp; Double Trouble</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Scuttle Buttin</Song>
+			<Artist>Stevie Ray Vaughan</Artist>
+			<NewArtist>Stevie Ray Vaughan &amp; Double Trouble</NewArtist>
+			<NewSong>Scuttle Buttin'</NewSong>
+		</Entry>
+		<Entry>
+			<Artist>Mastadon</Artist>
+			<NewArtist>Mastodon</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>American Girl</Song>
+			<Artist>Tom Petty</Artist>
+			<NewArtist>Tom Petty and the Heartbreakers</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Learning to Fly</Song>
+			<Artist>Tom Petty</Artist>
+			<NewArtist>Tom Petty and the Heartbreakers</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Refugee</Song>
+			<Artist>Tom Petty</Artist>
+			<NewArtist>Tom Petty and the Heartbreakers</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Symphonty of Destruction</Song>
+			<Artist>Megadeth</Artist>
+			<NewSong>Symphony Of Destruction</NewSong>
+		</Entry>
+		<Entry>
+			<Artist>Pat Benetar</Artist>
+			<NewArtist>Pat Benatar</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Sugar We're Going Down</Song>
+			<Artist>Fall Out Boy</Artist>
+			<NewSong>Sugar, We're Goin Down</NewSong>
+		</Entry>
+		<Entry>
+			<Song>Dance Dance</Song>
+			<Artist>Fall Out Boy</Artist>
+			<NewSong>Dance, Dance</NewSong>
+		</Entry>
+		<Entry>
+			<Song>You've Got Another Thing Coming</Song>
+			<Artist>Judas Priest</Artist>
+			<NewSong>You've Got Another Thing Comin'</NewSong>
+		</Entry>
+		<Entry>
+			<Song>Free Ride</Song>
+			<Artist>The Edgar Winter Group</Artist>
+			<NewArtist>Edgar Winter</NewArtist>
+		</Entry>
+		<Entry>
+			<Artist>Marvin Gaye &amp; Tammi Terrel</Artist>
+			<NewArtist>Marvin Gaye &amp; Tammi Terrell</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>It's Been A while</Song>
+			<Artist>Staind</Artist>
+			<NewSong>It's Been Awhile</NewSong>
+		</Entry>
+		<Entry>
+			<Song>Close to the Edge</Song>
+			<Artist>Thirty Seconds to Mars</Artist>
+			<NewSong>Closer to the Edge</NewSong>
+		</Entry>
+		<Entry>
+			<Artist>Joe Bonnamassa</Artist>
+			<NewArtist>Joe Bonamassa</NewArtist>
+		</Entry>
+		<Entry>
+			<Artist>Dick Dale</Artist>
+			<NewArtist>Dick Dale and His Del-Tones</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Christmas Eve/Sarajevo 12/24</Song>
+			<Artist>Trans-Siberian Orchestra</Artist>
+			<NewSong>Christmas Eve / Sarajevo 12/24</NewSong>
+		</Entry>
+		<Entry>
+			<Song>Selkeis: the Endless Obsession</Song>
+			<Artist>Between the Buried and Me</Artist>
+			<NewSong>Selkies: The Endless Obsession</NewSong>
+		</Entry>
+		<Entry>
+			<Song>Anastasia</Song>
+			<Artist>Slash</Artist>
+			<NewArtist>Slash featuring Myles Kennedy And The Conspirators</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Back From Cali</Song>
+			<Artist>Slash</Artist>
+			<NewArtist>Slash featuring Myles Kennedy</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>You're A Lie</Song>
+			<Artist>Slash</Artist>
+			<NewArtist>Slash featuring Myles Kennedy And The Conspirators</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>A Knife In The Dark (From The Fellowship Of The Ring)</Song>
+			<Artist>The Notetrackers</Artist>
+			<NewSong>A Knife In The Dark</NewSong>
+			<NewArtist>Howard Shore</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Back to the Future</Song>
+			<Artist>The Notetrackers</Artist>
+			<NewArtist>Alan Silvestri</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Batman - Theme</Song>
+			<Artist>The Notetrackers</Artist>
+			<NewArtist>Danny Elfman</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Jurassic Park - Theme</Song>
+			<Artist>The Notetrackers</Artist>
+			<NewArtist>John Williams</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Superman - Main Title</Song>
+			<Artist>The Notetrackers</Artist>
+			<NewArtist>John Williams</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Bad to the Bone</Song>
+			<Artist>George Thorogood</Artist>
+			<NewArtist>George Thorogood &amp; The Destroyers</NewArtist>
+		</Entry>
+		<Entry>
+			<Song>Broken</Song>
+			<Artist>Seether featuring Amy Lee</Artist>
+			<NewSong>'Broken' by Seether featuring Amy Lee</NewSong>
+			<NewArtist>Seether</NewArtist>
+		</Entry>
+	</Entries>
+</RemapOfficialEntries>

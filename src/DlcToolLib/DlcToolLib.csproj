@@ -96,7 +96,6 @@
     <Compile Include="Model\OfficialDlcList.cs" />
     <Compile Include="Model\RemapOfficialEntries.cs" />
     <Compile Include="Model\SongPack.cs" />
-    <Compile Include="MyPsarcBrowser.cs" />
     <Compile Include="OfficialDlcFinder.cs" />
     <Compile Include="OfficialDlcRemapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

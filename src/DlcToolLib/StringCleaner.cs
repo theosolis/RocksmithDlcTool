@@ -34,7 +34,7 @@ namespace DlcToolLib
 			}
 			if (_cleanPunctuation)
 			{
-				s = s.Replace("’", "'").Replace("“", "\"").Replace("”", "\"").Replace("–", "-").Replace("&", " and ");
+				s = s.Replace("’", "'").Replace("“", "\"").Replace("”", "\"").Replace("–", "-").Replace("&", "and");
 			}
 
 			if (s.StartsWith("the ", StringComparison.InvariantCultureIgnoreCase))

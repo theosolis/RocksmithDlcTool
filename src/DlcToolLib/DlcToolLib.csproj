@@ -83,6 +83,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\DlcSourceType.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
+    <Compile Include="Entities\LinksBetweenDlcSources.cs" />
     <Compile Include="Finders\DlcTuningsFinder.cs" />
     <Compile Include="Finders\ExistingDlcFinder.cs" />
     <Compile Include="DlcFunctions.cs" />

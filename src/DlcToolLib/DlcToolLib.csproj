@@ -11,10 +11,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DlcToolLib</RootNamespace>
     <AssemblyName>DlcToolLib</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,9 @@
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.8.4.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.8.4\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
     </Reference>
     <Reference Include="MiscUtil">
       <HintPath>..\..\lib\MiscUtil.dll</HintPath>
@@ -76,27 +80,25 @@
     <Compile Include="DlcListWriter.cs" />
     <Compile Include="DlcMatchCalculator.cs" />
     <Compile Include="DlcSortCalculator.cs" />
-    <Compile Include="DlcTuningsFinder.cs" />
-    <Compile Include="ExistingDlcFinder.cs" />
+    <Compile Include="Finders\DlcTuningsFinder.cs" />
+    <Compile Include="Finders\ExistingDlcFinder.cs" />
     <Compile Include="DlcFunctions.cs" />
     <Compile Include="Model\DlcMatch.cs" />
     <Compile Include="Model\DlcSortDetails.cs" />
-    <Compile Include="Model\DlcTuningItem.cs" />
+    <Compile Include="Entities\DlcTuningItem.cs" />
     <Compile Include="Model\DlcTuningList.cs" />
     <Compile Include="Model\DlcOwnershipInput.cs" />
-    <Compile Include="Model\DlcItem.cs" />
-    <Compile Include="Model\ExistingDlcItem.cs" />
+    <Compile Include="Entities\ExistingDlcItem.cs" />
     <Compile Include="Model\ExistingDlcList.cs" />
     <Compile Include="DlcOwnershipCalculator.cs" />
     <Compile Include="Model\ICarriesErrors.cs" />
-    <Compile Include="Model\IDlc.cs" />
-    <Compile Include="Model\IOfficialDlc.cs" />
+    <Compile Include="Entities\IDlc.cs" />
     <Compile Include="Model\DlcOwnership.cs" />
-    <Compile Include="Model\OfficialDlcItem.cs" />
+    <Compile Include="Entities\OfficialDlcItem.cs" />
     <Compile Include="Model\OfficialDlcList.cs" />
     <Compile Include="Model\RemapOfficialEntries.cs" />
     <Compile Include="Model\SongPack.cs" />
-    <Compile Include="OfficialDlcFinder.cs" />
+    <Compile Include="Finders\OfficialDlcFinder.cs" />
     <Compile Include="OfficialDlcRemapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringCleaner.cs" />

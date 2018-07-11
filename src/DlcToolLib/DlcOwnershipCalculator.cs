@@ -1,4 +1,5 @@
-﻿using DlcToolLib.Model;
+﻿using DlcToolLib.Entities;
+using DlcToolLib.Model;
 using System.Linq;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DlcToolLib.Entities;
 
 namespace DlcToolLib.Model
 {

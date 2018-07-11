@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using DlcToolLib.Entities;
 using DlcToolLib.Model;
 using HtmlAgilityPack;
 
-namespace DlcToolLib
+namespace DlcToolLib.Finders
 {
 	public class DlcTuningsFinder
 	{

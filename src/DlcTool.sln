@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DlcTool", "DlcTool\DlcTool.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DlcToolLib", "DlcToolLib\DlcToolLib.csproj", "{074A57D9-9130-4445-B780-29F98B420179}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DlcDatabase", "DlcDatabase\DlcDatabase.csproj", "{75DE55D7-DF39-47A4-B415-34DDD0EAB5C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{074A57D9-9130-4445-B780-29F98B420179}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{074A57D9-9130-4445-B780-29F98B420179}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{074A57D9-9130-4445-B780-29F98B420179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DE55D7-DF39-47A4-B415-34DDD0EAB5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DE55D7-DF39-47A4-B415-34DDD0EAB5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DE55D7-DF39-47A4-B415-34DDD0EAB5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DE55D7-DF39-47A4-B415-34DDD0EAB5C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

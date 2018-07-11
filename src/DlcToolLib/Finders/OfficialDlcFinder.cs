@@ -5,9 +5,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using DlcToolLib.Entities;
 using DlcToolLib.Model;
 
-namespace DlcToolLib
+namespace DlcToolLib.Finders
 {
 	public class OfficialDlcFinder
 	{

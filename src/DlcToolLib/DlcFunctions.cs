@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using DlcToolLib.Entities;
+using DlcToolLib.Finders;
 using DlcToolLib.Model;
 using RocksmithToolkitLib.PsarcLoader;
 using System.Collections.Generic;

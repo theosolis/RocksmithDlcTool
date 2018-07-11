@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using DlcToolLib.Entities;
 using DlcToolLib.Model;
 using RocksmithToTabLib;
 using System.Linq;
@@ -9,7 +10,7 @@ using RijndaelEncryptor = RocksmithToolkitLib.DLCPackage.RijndaelEncryptor;
 using Newtonsoft.Json;
 using RocksmithToolkitLib.DLCPackage.Manifest;
 
-namespace DlcToolLib
+namespace DlcToolLib.Finders
 {
 	public class ExistingDlcFinder
 	{

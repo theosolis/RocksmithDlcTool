@@ -1,4 +1,4 @@
-﻿namespace DlcToolLib.Model
+﻿namespace DlcToolLib.Entities
 {
 	public interface IDlc
 	{

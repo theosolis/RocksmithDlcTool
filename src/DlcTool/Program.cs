@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using CommandLine;
-using CommandLine.Text;
 using DlcToolLib;
 using DlcToolLib.Model;
 using System.IO;
+using Fclp;
 
 namespace DlcTool
 {
@@ -19,20 +18,10 @@ namespace DlcTool
 			//var dlcFinder = new DlcTuningsFinder();
 			//var dlcTuningsList = dlcFinder.GetRocksmithDlcListFromFile(@"C:\Users\goliver\Documents\Visual Studio 2017\Projects\DlcTool\Testing\DlcList.html");
 			////			var url = "https://theriffrepeater.com/rocksmith-2014-setlist/rocksmith-2014-tunings/";
+			var cmdLineArgs = ParseCommandLine(args);
+			if (cmdLineArgs == null) return;
 
-			var dlcOwnershipInput = new DlcOwnershipInput();
-			CmdLineArgs cmdLineArgs = new CmdLineArgs();
-			var parserResults = Parser.Default.ParseArguments<CmdLineArgs>(args)
-				.WithParsed(options =>
-					{
-						dlcOwnershipInput = GetDlcOwnershipInputs(options);
-						cmdLineArgs = options;
-					}
-				);
-			if (parserResults is NotParsed<CmdLineArgs>)
-			{
-				return;
-			}
+			var dlcOwnershipInput = GetDlcOwnershipInputs(cmdLineArgs);
 
 			dlcOwnershipInput.RemapOfficialEntries = LoadRemapOfficialEntries(cmdLineArgs.CheckDlc ? cmdLineArgs.RemapFilePathOfficialToTunings : cmdLineArgs.RemapFilePathOfficialToDlc);
 
@@ -46,18 +35,80 @@ namespace DlcTool
 				return;
 			}
 
-			if (!IsValidInputs(dlcOwnershipInput))
-			{
-				Console.WriteLine(HelpText.RenderUsageText(parserResults));
-				return;
-			}
-
 			if (cmdLineArgs.CheckDlc)
 			{
 				CheckDlc(dlcOwnershipInput, cmdLineArgs.OutputDirPath, cmdLineArgs.ConvertEncoding);
 				return;
 			}
 			CalculateOwnership(dlcOwnershipInput, cmdLineArgs.OutputDirPath, cmdLineArgs.ConvertEncoding);
+		}
+
+		static CmdLineArgs ParseCommandLine(string[] args)
+		{
+			var p = new FluentCommandLineParser();
+			var cmdLineArgs = new CmdLineArgs();
+
+			p.Setup<string>("dlcfolder")
+				.Callback(dlcFolder => cmdLineArgs.DlcFolder = dlcFolder)
+				.WithDescription("Path to dlc folder for Rocksmith")
+				.Required();
+
+			p.Setup<string>("rs1dlcfolder")
+				.Callback(rs1DlcFolder => cmdLineArgs.rs1DlcFolder = rs1DlcFolder)
+				.WithDescription("Path to RS1 dlc");
+
+			p.Setup<string>("source")
+				.Callback(val => cmdLineArgs.OfficialDlcSource = val)
+				.WithDescription("Where to find the list of Rocksmith dlc")
+				.Required();
+
+			p.Setup<string>("outputdir")
+				.Callback(val => cmdLineArgs.OutputDirPath = val)
+				.WithDescription("Where to write the output files")
+				.Required();
+
+			p.Setup<string>("officialsourcexpath")
+				.Callback(val => cmdLineArgs.OfficialSourceXPath = val)
+				.WithDescription("XPath to find the <songs> node in the official source")
+				.SetDefault("//div[@class='tabPanel downloads']/songs")
+				.Required();
+
+			p.Setup<bool>("convert")
+				.Callback(val => cmdLineArgs.ConvertEncoding = val)
+				.WithDescription("Try to convert unicode characters to ASCII where possible (eg ’ to ')");
+
+			p.Setup<string>("dlcmap")
+				.Callback(val => cmdLineArgs.RemapFilePathOfficialToDlc = val)
+				.WithDescription("Path to the mapping file for helping map official dlc list to dlc items")
+				.SetDefault("OfficialEntriesToDlc.xml");
+
+			p.Setup<string>("tuningmap")
+				.Callback(val => cmdLineArgs.OutputDirPath = val)
+				.WithDescription("Path to the mapping file for helping map official dlc list to tunings list")
+				.SetDefault("OfficialEntriesToTunings.xml");
+
+			p.Setup<bool>("checkdlc")
+				.Callback(val => cmdLineArgs.CheckDlc = val)
+				.WithDescription("compare sources to find missing items");
+
+			p.Setup<string>("tunings")
+				.Callback(val => cmdLineArgs.TuningSource = val)
+				.WithDescription("RiffRepeater tunings list");
+
+			p.SetupHelp("h", "help", "?")
+			.Callback(text => Console.WriteLine(text));
+
+			var result = p.Parse(args);
+
+			if (result.HasErrors == true)
+			{
+				Console.WriteLine(result.ErrorText);
+				return null;
+			}
+			if (result.HelpCalled)
+				return null;
+
+			return cmdLineArgs;
 		}
 
 		private static RemapOfficialEntries LoadRemapOfficialEntries(string path)
@@ -84,17 +135,6 @@ namespace DlcTool
 			dlcListWriter.WriteOfficialDlcToFile(ownershipDetails.MissingOfficialDlc, Path.Combine(outputDirPath, "missing.csv"));
 			dlcListWriter.WriteSongPackInfoToFile(ownershipDetails.SongPacks, Path.Combine(outputDirPath, "songpacks.csv"));
 			dlcListWriter.WriteDlcListToFile(ownershipDetails.UnknownExisting, Path.Combine(outputDirPath, "unmatchedExisting.csv"));
-		}
-
-		private static bool IsValidInputs(DlcOwnershipInput missingDlcInput)
-		{
-			if (string.IsNullOrEmpty(missingDlcInput.DlcFolder2014))
-				return false;
-
-			if (missingDlcInput.RemapOfficialEntries == null)
-				return false;
-
-			return !string.IsNullOrEmpty(missingDlcInput.OfficialDlcSource);
 		}
 
 		private static DlcOwnershipInput GetDlcOwnershipInputs(CmdLineArgs cmdLineArgs)

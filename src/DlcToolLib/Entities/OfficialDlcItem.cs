@@ -1,7 +1,8 @@
-﻿namespace DlcToolLib.Model
+﻿namespace DlcToolLib.Entities
 {
-	public class OfficialDlcItem : IOfficialDlc
+	public class OfficialDlcItem : IDlc
 	{
+		public int Id { get; set; }
 		public string Artist { get; set; }
 		public string Song { get; set; }
 		public string SongPack { get; set; }

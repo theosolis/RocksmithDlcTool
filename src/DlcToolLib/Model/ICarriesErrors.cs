@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DlcToolLib.Model
 {
-	interface ICarriesErrors
+	public interface ICarriesErrors
 	{
 		List<string> Errors { get; set; }
 	}

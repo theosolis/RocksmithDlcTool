@@ -30,18 +30,14 @@ namespace DlcToolLib
 
 			var stringCleaner = new StringCleaner(true, true, true, true);
 			var dlcMatchCalculator = new DlcMatchCalculator(stringCleaner);
-			var dlcMatches = dlcMatchCalculator.GetDlcMatches(officialDlcList.DlcItems, tuningDlcList.DlcTunings);
+			var dlcMatches = dlcMatchCalculator.GetDlcMatches(officialDlcList.DlcList, tuningDlcList.DlcList);
 
 			return dlcMatches;
 		}
 
-		public void WriteAllEntriesFromPsArcFiles(string outputDir, string directoryToSearch)
+		public void LoadSourceToStore(string dbFile, string sourcePath, DlcSourceType sourceType, bool replaceExisting)
 		{
-			var psArcFiles = Directory.GetFiles(directoryToSearch, "*.psarc", SearchOption.AllDirectories);
-			foreach (var file in psArcFiles)
-			{
-				WriteEntriesForFile(outputDir, file);
-			}
+
 		}
 
 		private DlcTuningList GetTuningDlcList(string inputSource)
@@ -64,16 +60,6 @@ namespace DlcToolLib
 			var officialDlcFinder = new OfficialDlcFinder(officialDlcRemapper);
 			
 			return officialDlcFinder.GetOfficialDlcList(officialDlcSource, xpathSelector);
-		}
-
-		private void WriteEntriesForFile(string outputDir, string fileToRead)
-		{
-			var output_root = Path.GetFileNameWithoutExtension(fileToRead);
-
-			using (var arcLoader = new PsarcLoader(fileToRead))
-			{
-				File.WriteAllLines(Path.Combine(outputDir, $"{output_root}_entries.txt"), arcLoader.ExtractEntryNames());
-			}
 		}
 	}
 }

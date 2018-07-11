@@ -80,6 +80,7 @@
     <Compile Include="DlcListWriter.cs" />
     <Compile Include="DlcMatchCalculator.cs" />
     <Compile Include="DlcSortCalculator.cs" />
+    <Compile Include="Entities\DlcSourceType.cs" />
     <Compile Include="Finders\DlcTuningsFinder.cs" />
     <Compile Include="Finders\ExistingDlcFinder.cs" />
     <Compile Include="DlcFunctions.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Entities\IDlc.cs" />
     <Compile Include="Model\DlcOwnership.cs" />
     <Compile Include="Entities\OfficialDlcItem.cs" />
+    <Compile Include="Model\IFindDlcResult.cs" />
     <Compile Include="Model\OfficialDlcList.cs" />
     <Compile Include="Model\RemapOfficialEntries.cs" />
     <Compile Include="Model\SongPack.cs" />

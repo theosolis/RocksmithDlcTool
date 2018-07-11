@@ -20,12 +20,12 @@ namespace DlcToolLib
 		public DlcOwnership Calculate(OfficialDlcList dlcList, ExistingDlcList existingList)
 		{
 			var rv = new DlcOwnership();
-			var dlcMatches = _dlcMatchCalculator.GetDlcMatches(dlcList.DlcItems, existingList.ExistingDlc);
+			var dlcMatches = _dlcMatchCalculator.GetDlcMatches(dlcList.DlcList, existingList.DlcList);
 
 			rv.MissingOfficialDlc = dlcMatches.Where(x=>x.MatchResult == MatchResultType.UnmatchedLeftDlc).Select(x=>x.LeftDlc).ToList();
 			rv.UnknownExisting = dlcMatches.Where(x => x.MatchResult == MatchResultType.UnmatchedRightDlc).Select(x => x.RightDlc).ToList();
 
-			rv.SongPacks = CreateSongPackDetails(dlcList.DlcItems, dlcMatches);
+			rv.SongPacks = CreateSongPackDetails(dlcList.DlcList, dlcMatches);
 
 			return rv;
 		}

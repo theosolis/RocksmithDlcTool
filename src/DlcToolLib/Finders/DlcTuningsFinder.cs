@@ -43,7 +43,7 @@ namespace DlcToolLib.Finders
 			//want unique per artist - currently the RiffRepeater page has duplicates in it!
 			foreach (var artist in rawList.GroupBy(x => new {x.Artist, x.Song}))
 			{
-				rv.DlcTunings.Add(artist.First());
+				rv.DlcList.Add(artist.First());
 			}
 			return rv;
 		}

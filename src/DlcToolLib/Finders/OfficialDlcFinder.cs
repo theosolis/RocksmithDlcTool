@@ -51,7 +51,7 @@ namespace DlcToolLib.Finders
 				from dlcRow in value.SelectNodes("song")
 				select MapToOfficialDlcItem(dlcRow);
 
-			rv.DlcItems.AddRange(RemapOfficialDlc(rawList));
+			rv.DlcList.AddRange(RemapOfficialDlc(rawList));
 
 			return rv;
 		}
@@ -72,7 +72,7 @@ namespace DlcToolLib.Finders
 
 		private string GetField(HtmlNode dlcRow, string tagName)
 		{
-			var childNode = dlcRow.ChildNodes.Where(x => x.Name == tagName).SingleOrDefault();
+			var childNode = dlcRow.ChildNodes.SingleOrDefault(x => x.Name == tagName);
 			if (childNode == null)
 				return string.Empty;
 

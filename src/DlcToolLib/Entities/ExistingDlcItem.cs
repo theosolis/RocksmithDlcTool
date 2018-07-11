@@ -1,6 +1,6 @@
 ﻿namespace DlcToolLib.Entities
 {
-	public enum DlcSourceType
+	public enum DlcGameVersionType
 	{
 		Rs1,
 		Rs2014
@@ -14,6 +14,6 @@
 
 		public string PathToFile { get; set; }
 		public string Identifier { get; set; }
-		public DlcSourceType DlcSource { get; set; }
+		public DlcGameVersionType DlcSource { get; set; }
 	}
 }

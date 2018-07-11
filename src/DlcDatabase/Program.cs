@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DlcToolLib;
+using DlcToolLib.Entities;
 
 
 namespace DlcDatabase
@@ -14,6 +16,9 @@ namespace DlcDatabase
 		{
 			var programArgs = ParseArguments(args);
 			if (programArgs == null) return;
+
+			var dlcFuncs = new DlcFunctions();
+			dlcFuncs.LoadSourceToStore(programArgs.PathToDatabase, programArgs.DlcSourcePath, programArgs.SourceType, programArgs.ReplaceExistingItems);
 		}
 
 		static ProgramArgs ParseArguments(string[] args)
@@ -35,6 +40,10 @@ namespace DlcDatabase
 			.Callback(dbPath => programArgs.PathToDatabase = dbPath)
 			.WithDescription("Database file for storing/loading DLC items")
 			.Required();
+
+			p.Setup<bool>('r', "reset")
+				.Callback(val => programArgs.ReplaceExistingItems = val)
+				.WithDescription("Reset the dlc inside the database ie delete existing when reloading (WARNING!)");
 
 			p.SetupHelp("h", "help", "?")
 			.Callback(text => Console.WriteLine(text));

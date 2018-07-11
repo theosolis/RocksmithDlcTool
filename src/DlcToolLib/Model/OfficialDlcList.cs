@@ -3,9 +3,9 @@ using DlcToolLib.Entities;
 
 namespace DlcToolLib.Model
 {
-	public class OfficialDlcList : ICarriesErrors
+	public class OfficialDlcList : IFindDlcResult<OfficialDlcItem>
 	{
-		public List<OfficialDlcItem> DlcItems { get; set; } = new List<OfficialDlcItem>();
+		public List<OfficialDlcItem> DlcList { get; set; } = new List<OfficialDlcItem>();
 		public List<string> Errors { get; set; } = new List<string>();
 	}
 }

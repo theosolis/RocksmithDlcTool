@@ -8,13 +8,25 @@ using HtmlAgilityPack;
 
 namespace DlcToolLib.Finders
 {
-	public class DlcTuningsFinder
+	public class DlcTuningsFinder : IDlcFinder<DlcTuningItem>
 	{
 		private const int DlcTableCellSong = 0;
 		private const int DlcTableCellArtist = 1;
 		private const int DlcTableCellLeadTuning = 2;
 		private const int DlcTableCellRhythmTuning = 3;
 		private const int DlcTableCellBassTuning = 4;
+
+		private IDlcSortCalculator _dlcSortCalculator;
+
+		public DlcTuningsFinder(IDlcSortCalculator dlcSortCalculator)
+		{
+			_dlcSortCalculator = dlcSortCalculator;
+		}
+
+		public IFindDlcResult<DlcTuningItem> FindDlc(string sourcePath)
+		{
+			return GetDlcTuningList(sourcePath);
+		}
 
 		public DlcTuningList GetDlcTuningList(string sourcePath)
 		{
@@ -40,10 +52,10 @@ namespace DlcToolLib.Finders
 				from dlcRow in value.SelectNodes("tbody/tr")
 				select MapToOfficialDlcItem(dlcRow);
 
-			//want unique per artist - currently the RiffRepeater page has duplicates in it!
+			//want unique per artist - currently the DlcTuning page has duplicates in it!
 			foreach (var artist in rawList.GroupBy(x => new {x.Artist, x.Song}))
 			{
-				rv.DlcTunings.Add(artist.First());
+				rv.DlcList.Add(artist.First());
 			}
 			return rv;
 		}
@@ -60,7 +72,10 @@ namespace DlcToolLib.Finders
 				BassTuning = GetChildCellText(tableCells, DlcTableCellBassTuning)
 			};
 
-
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
 			return rv;
 		}
 

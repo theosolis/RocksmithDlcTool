@@ -12,15 +12,32 @@ using RocksmithToolkitLib.DLCPackage.Manifest;
 
 namespace DlcToolLib.Finders
 {
-	public class ExistingDlcFinder
+	public class ExistingDlcFinder : IDlcFinder<ExistingDlcItem>
 	{
+		private IDlcSortCalculator _dlcSortCalculator;
+
+		public ExistingDlcFinder(IDlcSortCalculator dlcSortCalculator)
+		{
+			_dlcSortCalculator = dlcSortCalculator;
+		}
+
+		public IFindDlcResult<ExistingDlcItem> FindDlc(string sourcePath)
+		{
+			var rv = new ExistingDlcList();
+
+			rv.DlcList.AddRange(FindRocksmith2014(sourcePath));
+			rv.DlcList.AddRange(FindRocksmith1(sourcePath));
+
+			return rv;
+		}
+
 		public ExistingDlcList FindAllDlc(string rs2014DlcFolder, string rs1DlcFolder)
 		{
 			var rv = new ExistingDlcList();
-			rv.ExistingDlc.AddRange(FindRocksmith2014(rs2014DlcFolder));
+			rv.DlcList.AddRange(FindRocksmith2014(rs2014DlcFolder));
 
 			if(!string.IsNullOrWhiteSpace(rs1DlcFolder))
-				rv.ExistingDlc.AddRange(FindRocksmith1(rs1DlcFolder));
+				rv.DlcList.AddRange(FindRocksmith1(rs1DlcFolder));
 
 			return rv;
 		}
@@ -58,12 +75,6 @@ namespace DlcToolLib.Finders
 			}
 		}
 
-		private bool ArrangementsAreInFile(PsarcBrowser browser, SongInfo x)
-		{
-			var firstArrangement = browser.GetArrangement(x.Identifier, x.Arrangements.First());
-			return firstArrangement != null;
-		}
-
 		private ExistingDlcItem MapSongToExistingDlcItem(SongInfo song, string psArcFile)
 		{
 			var rv = new ExistingDlcItem
@@ -72,8 +83,13 @@ namespace DlcToolLib.Finders
 				Song = song.Title,
 				PathToFile = psArcFile,
 				Identifier = song.Identifier,
-				DlcSource = DlcSourceType.Rs2014
+				DlcSource = DlcGameVersionType.Rs2014
 			};
+
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
 
 			return rv;
 		}
@@ -86,8 +102,13 @@ namespace DlcToolLib.Finders
 				Song = song.SongName,
 				PathToFile = datFile,
 				Identifier = song.SongKey,
-				DlcSource = DlcSourceType.Rs1
+				DlcSource = DlcGameVersionType.Rs1
 			};
+
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
 
 			return rv;
 		}

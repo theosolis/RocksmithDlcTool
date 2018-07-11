@@ -3,8 +3,9 @@ using DlcToolLib.Entities;
 
 namespace DlcToolLib.Model
 {
-	public class ExistingDlcList
+	public class ExistingDlcList : IFindDlcResult<ExistingDlcItem>
 	{
-		public List<ExistingDlcItem> ExistingDlc { get; set; } = new List<ExistingDlcItem>();
+		public List<ExistingDlcItem> DlcList { get; set; } = new List<ExistingDlcItem>();
+		public List<string> Errors { get; set; } = new List<string>();
 	}
 }

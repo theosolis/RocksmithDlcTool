@@ -58,5 +58,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DlcToolLib\DlcToolLib.csproj">
+      <Project>{074A57D9-9130-4445-B780-29F98B420179}</Project>
+      <Name>DlcToolLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -34,8 +34,12 @@ namespace DlcToolLib
 			}
 			if (_cleanPunctuation)
 			{
-				s = s.Replace("’", "'").Replace("“", "\"").Replace("”", "\"").Replace("–", "-");
+				s = s.Replace("’", "'").Replace("“", "\"").Replace("”", "\"").Replace("–", "-").Replace("&", " and ");
 			}
+
+			if (s.StartsWith("the ", StringComparison.InvariantCultureIgnoreCase))
+				s = s.Substring(4);
+
 			return s;
 		}
 
@@ -44,13 +48,9 @@ namespace DlcToolLib
 		{
 			s = Clean(s).ToLower();
 
-			if (s.StartsWith("the ", StringComparison.InvariantCultureIgnoreCase))
-				s = s.Substring(4);
-
 			if (!_stripArtistName)
 				return s;
 
-			s = Regex.Replace(s, " and ", "&", RegexOptions.IgnoreCase);
 			return StripPunctuation(s);
 		}
 

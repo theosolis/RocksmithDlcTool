@@ -12,7 +12,15 @@ namespace DlcToolLib
 	public interface IDlcSortCalculator
 	{
 		DlcSortDetails CreateSortDetails(IDlc dlc);
-		List<SortableItem<T>> ConstructSortableItemList<T>(IEnumerable<T> itemsToSort) where T : IDlc;
+		DlcSortDetails CreateSortDetails(string artistName, string song);
+	}
+
+	public static class DlcSortCalculatorOracle
+	{
+		public static IDlcSortCalculator GetDefaultDlcSortCalculator()
+		{
+			return new DlcSortCalculator(new StringCleaner(true,true,true,true));
+		}
 	}
 
 	public class DlcSortCalculator : IDlcSortCalculator
@@ -26,10 +34,16 @@ namespace DlcToolLib
 			_stringCleaner = stringCleaner;
 		}
 
+		//this is being deprecated
 		public DlcSortDetails CreateSortDetails(IDlc dlc)
 		{
-			var artistSort = _stringCleaner.MakeArtistSortName(dlc.Artist);
-			var songSort = _stringCleaner.MakeSongSortName(dlc.Song);
+			return CreateSortDetails(dlc.Artist, dlc.Song);
+		}
+
+		public DlcSortDetails CreateSortDetails(string artist, string song)
+		{
+			var artistSort = _stringCleaner.MakeArtistSortName(artist);
+			var songSort = _stringCleaner.MakeSongSortName(song);
 			var uniqueKey = GetUniqueKey(artistSort, songSort);
 
 			return new DlcSortDetails

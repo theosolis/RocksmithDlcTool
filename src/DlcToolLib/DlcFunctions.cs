@@ -5,6 +5,8 @@ using DlcToolLib.Finders;
 using DlcToolLib.Model;
 using RocksmithToolkitLib.PsarcLoader;
 using System.Collections.Generic;
+using DlcToolLib.Loading;
+using LiteDB;
 
 namespace DlcToolLib
 {
@@ -30,30 +32,31 @@ namespace DlcToolLib
 
 			var stringCleaner = new StringCleaner(true, true, true, true);
 			var dlcMatchCalculator = new DlcMatchCalculator(stringCleaner);
-			var dlcMatches = dlcMatchCalculator.GetDlcMatches(officialDlcList.DlcItems, tuningDlcList.DlcTunings);
+			var dlcMatches = dlcMatchCalculator.GetDlcMatches(officialDlcList.DlcList, tuningDlcList.DlcList);
 
 			return dlcMatches;
 		}
 
-		public void WriteAllEntriesFromPsArcFiles(string outputDir, string directoryToSearch)
+		public List<string> LoadSourceToStore(string dbFile, string sourcePath, DlcSourceType sourceType, DlcLoadPolicy loadPolicy)
 		{
-			var psArcFiles = Directory.GetFiles(directoryToSearch, "*.psarc", SearchOption.AllDirectories);
-			foreach (var file in psArcFiles)
+			using (var db = new LiteDatabase(dbFile))
 			{
-				WriteEntriesForFile(outputDir, file);
+				var factory = LoadingOracle.GetDefaultLoadCoordinatorFactory();
+				var loadCoordinator = factory.CreateLoadCoordinator(sourceType);
+				return loadCoordinator.LoadSourceToDatabase(sourcePath, db, loadPolicy);
 			}
 		}
 
 		private DlcTuningList GetTuningDlcList(string inputSource)
 		{
-			var dlcTuningsFinder = new DlcTuningsFinder();
+			var dlcTuningsFinder = new DlcTuningsFinder(DlcSortCalculatorOracle.GetDefaultDlcSortCalculator());
 			var dlcTuningList = dlcTuningsFinder.GetDlcTuningList(inputSource);
 			return dlcTuningList;
 		}
 
 		private ExistingDlcList GetExistingDlcList(string rs2014DlcFolder, string rs1DlcFolder)
 		{
-			var existingFinder = new ExistingDlcFinder();
+			var existingFinder = new ExistingDlcFinder(DlcSortCalculatorOracle.GetDefaultDlcSortCalculator());
 			var existingList = existingFinder.FindAllDlc(rs2014DlcFolder,rs1DlcFolder);
 			return existingList;
 		}
@@ -61,19 +64,9 @@ namespace DlcToolLib
 		private OfficialDlcList GetOfficialDlcList(string officialDlcSource, string xpathSelector, RemapOfficialEntries remapOfficialEntries)
 		{
 			var officialDlcRemapper = new OfficialDlcRemapper(remapOfficialEntries);
-			var officialDlcFinder = new OfficialDlcFinder(officialDlcRemapper);
+			var officialDlcFinder = new OfficialDlcFinder(officialDlcRemapper, xpathSelector, DlcSortCalculatorOracle.GetDefaultDlcSortCalculator());
 			
-			return officialDlcFinder.GetOfficialDlcList(officialDlcSource, xpathSelector);
-		}
-
-		private void WriteEntriesForFile(string outputDir, string fileToRead)
-		{
-			var output_root = Path.GetFileNameWithoutExtension(fileToRead);
-
-			using (var arcLoader = new PsarcLoader(fileToRead))
-			{
-				File.WriteAllLines(Path.Combine(outputDir, $"{output_root}_entries.txt"), arcLoader.ExtractEntryNames());
-			}
+			return officialDlcFinder.GetOfficialDlcList(officialDlcSource);
 		}
 	}
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DlcToolLib.Entities;
 
 namespace DlcDatabase
 {
-	public enum DlcSourceType { Official, RiffRepeater, Steam, Existing }
 
 	class ProgramArgs
 	{
@@ -15,5 +15,9 @@ namespace DlcDatabase
 		public DlcSourceType SourceType { get; set; }
 
 		public string PathToDatabase { get; set; }
+
+		public bool ReplaceExistingItems { get; set; }
+		public bool AddNewRows { get; set; }
+		public bool UpdateExisting { get; set; }
 	}
 }

@@ -10,19 +10,28 @@ using DlcToolLib.Model;
 
 namespace DlcToolLib.Finders
 {
-	public class OfficialDlcFinder
+	public class OfficialDlcFinder : IDlcFinder<OfficialDlcItem>
 	{
 		private readonly OfficialDlcRemapper _dlcRemapper;
+		private readonly string _songsXPath;
+		private readonly IDlcSortCalculator _dlcSortCalculator;
 
-		public OfficialDlcFinder(OfficialDlcRemapper officialDlcRemapper)
+		public OfficialDlcFinder(OfficialDlcRemapper officialDlcRemapper, string songsXPath, IDlcSortCalculator dlcSortCalculator)
 		{
 			_dlcRemapper = officialDlcRemapper;
+			_songsXPath = songsXPath;
+			_dlcSortCalculator = dlcSortCalculator;
 		}
 
-		public OfficialDlcList GetOfficialDlcList(string sourcePath, string songsXPath)
+		public IFindDlcResult<OfficialDlcItem> FindDlc(string sourcePath)
+		{
+			return GetOfficialDlcList(sourcePath);
+		}
+
+		public OfficialDlcList GetOfficialDlcList(string sourcePath)
 		{
 			var doc = DlcHelper.GetHtmlDocument(sourcePath);
-			return ParsePage(doc, songsXPath);
+			return ParsePage(doc, _songsXPath);
 		}
 
 
@@ -51,7 +60,7 @@ namespace DlcToolLib.Finders
 				from dlcRow in value.SelectNodes("song")
 				select MapToOfficialDlcItem(dlcRow);
 
-			rv.DlcItems.AddRange(RemapOfficialDlc(rawList));
+			rv.DlcList.AddRange(RemapOfficialDlc(rawList));
 
 			return rv;
 		}
@@ -66,13 +75,17 @@ namespace DlcToolLib.Finders
 				Year = GetField(dlcRow, "year"),
 				SongPack = GetField(dlcRow, "song-pack")
 			};
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
 
 			return rv;
 		}
 
 		private string GetField(HtmlNode dlcRow, string tagName)
 		{
-			var childNode = dlcRow.ChildNodes.Where(x => x.Name == tagName).SingleOrDefault();
+			var childNode = dlcRow.ChildNodes.SingleOrDefault(x => x.Name == tagName);
 			if (childNode == null)
 				return string.Empty;
 

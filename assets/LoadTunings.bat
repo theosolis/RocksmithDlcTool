@@ -1,0 +1,1 @@
+..\src\DlcDatabase\bin\Debug\DlcDatabase.exe --type DlcTuning --source H:\src\RocksmithDlcTool\assets\RiffRepeater_Tunings.html --database h:\temp\test.db

@@ -17,5 +17,7 @@ namespace DlcDatabase
 		public string PathToDatabase { get; set; }
 
 		public bool ReplaceExistingItems { get; set; }
+		public bool AddNewRows { get; set; }
+		public bool UpdateExisting { get; set; }
 	}
 }

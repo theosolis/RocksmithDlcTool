@@ -8,13 +8,20 @@ using HtmlAgilityPack;
 
 namespace DlcToolLib.Finders
 {
-	public class DlcTuningsDlcFinder : IDlcFinder<DlcTuningItem>
+	public class DlcTuningsFinder : IDlcFinder<DlcTuningItem>
 	{
 		private const int DlcTableCellSong = 0;
 		private const int DlcTableCellArtist = 1;
 		private const int DlcTableCellLeadTuning = 2;
 		private const int DlcTableCellRhythmTuning = 3;
 		private const int DlcTableCellBassTuning = 4;
+
+		private IDlcSortCalculator _dlcSortCalculator;
+
+		public DlcTuningsFinder(IDlcSortCalculator dlcSortCalculator)
+		{
+			_dlcSortCalculator = dlcSortCalculator;
+		}
 
 		public IFindDlcResult<DlcTuningItem> FindDlc(string sourcePath)
 		{
@@ -65,7 +72,10 @@ namespace DlcToolLib.Finders
 				BassTuning = GetChildCellText(tableCells, DlcTableCellBassTuning)
 			};
 
-
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
 			return rv;
 		}
 

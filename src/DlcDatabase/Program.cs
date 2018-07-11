@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DlcToolLib;
 using DlcToolLib.Entities;
+using DlcToolLib.Model;
 
 
 namespace DlcDatabase
@@ -18,7 +19,14 @@ namespace DlcDatabase
 			if (programArgs == null) return;
 
 			var dlcFuncs = new DlcFunctions();
-			dlcFuncs.LoadSourceToStore(programArgs.PathToDatabase, programArgs.DlcSourcePath, programArgs.SourceType, programArgs.ReplaceExistingItems);
+			var loadPolicy = new DlcLoadPolicy
+			{
+				AddNewItems = programArgs.AddNewRows,
+				ClearExistingBeforeLoad = programArgs.ReplaceExistingItems,
+				UpdateExisting = programArgs.UpdateExisting
+			};
+
+			dlcFuncs.LoadSourceToStore(programArgs.PathToDatabase, programArgs.DlcSourcePath, programArgs.SourceType, loadPolicy);
 		}
 
 		static ProgramArgs ParseArguments(string[] args)
@@ -44,6 +52,16 @@ namespace DlcDatabase
 			p.Setup<bool>('r', "reset")
 				.Callback(val => programArgs.ReplaceExistingItems = val)
 				.WithDescription("Reset the dlc inside the database ie delete existing when reloading (WARNING!)");
+
+			p.Setup<bool>('n', "addnew")
+				.Callback(val => programArgs.AddNewRows = val)
+				.WithDescription("Add new rows not currently in the db (automatically true if --reset is used)")
+				.SetDefault(true);
+
+			p.Setup<bool>('u', "update")
+				.Callback(val => programArgs.UpdateExisting = val)
+				.WithDescription("Update existing rows (if unique key matches)")
+				.SetDefault(false);
 
 			p.SetupHelp("h", "help", "?")
 			.Callback(text => Console.WriteLine(text));

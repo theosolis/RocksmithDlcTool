@@ -8,6 +8,6 @@ namespace DlcToolLib.Loading
 	public interface IDlcLoader<T>
 		where T : IDlc
 	{
-		List<string> LoadDlcList(LiteDatabase database, IFindDlcResult<T> dlcList, bool clearExistingItemsFirst);
+		List<string> LoadDlcList(LiteDatabase database, IFindDlcResult<T> dlcList, DlcLoadPolicy loadPolicy);
 	}
 }

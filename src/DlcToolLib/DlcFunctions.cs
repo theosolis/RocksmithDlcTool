@@ -37,26 +37,26 @@ namespace DlcToolLib
 			return dlcMatches;
 		}
 
-		public List<string> LoadSourceToStore(string dbFile, string sourcePath, DlcSourceType sourceType, bool clearExistingItemsFirst)
+		public List<string> LoadSourceToStore(string dbFile, string sourcePath, DlcSourceType sourceType, DlcLoadPolicy loadPolicy)
 		{
 			using (var db = new LiteDatabase(dbFile))
 			{
 				var factory = LoadingOracle.GetDefaultLoadCoordinatorFactory();
 				var loadCoordinator = factory.CreateLoadCoordinator(sourceType);
-				return loadCoordinator.LoadSourceToDatabase(sourcePath, db, clearExistingItemsFirst);
+				return loadCoordinator.LoadSourceToDatabase(sourcePath, db, loadPolicy);
 			}
 		}
 
 		private DlcTuningList GetTuningDlcList(string inputSource)
 		{
-			var dlcTuningsFinder = new DlcTuningsDlcFinder();
+			var dlcTuningsFinder = new DlcTuningsFinder(DlcSortCalculatorOracle.GetDefaultDlcSortCalculator());
 			var dlcTuningList = dlcTuningsFinder.GetDlcTuningList(inputSource);
 			return dlcTuningList;
 		}
 
 		private ExistingDlcList GetExistingDlcList(string rs2014DlcFolder, string rs1DlcFolder)
 		{
-			var existingFinder = new ExistingDlcFinder();
+			var existingFinder = new ExistingDlcFinder(DlcSortCalculatorOracle.GetDefaultDlcSortCalculator());
 			var existingList = existingFinder.FindAllDlc(rs2014DlcFolder,rs1DlcFolder);
 			return existingList;
 		}
@@ -64,7 +64,7 @@ namespace DlcToolLib
 		private OfficialDlcList GetOfficialDlcList(string officialDlcSource, string xpathSelector, RemapOfficialEntries remapOfficialEntries)
 		{
 			var officialDlcRemapper = new OfficialDlcRemapper(remapOfficialEntries);
-			var officialDlcFinder = new OfficialDlcFinder(officialDlcRemapper, xpathSelector);
+			var officialDlcFinder = new OfficialDlcFinder(officialDlcRemapper, xpathSelector, DlcSortCalculatorOracle.GetDefaultDlcSortCalculator());
 			
 			return officialDlcFinder.GetOfficialDlcList(officialDlcSource);
 		}

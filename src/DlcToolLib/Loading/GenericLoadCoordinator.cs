@@ -2,6 +2,7 @@
 using System.Linq;
 using DlcToolLib.Entities;
 using DlcToolLib.Finders;
+using DlcToolLib.Model;
 using LiteDB;
 
 namespace DlcToolLib.Loading
@@ -18,13 +19,13 @@ namespace DlcToolLib.Loading
 			_myLoader = myLoader;
 		}
 
-		public List<string> LoadSourceToDatabase(string sourcePath, LiteDatabase database, bool clearExistingItemsFirst)
+		public List<string> LoadSourceToDatabase(string sourcePath, LiteDatabase database, DlcLoadPolicy loadPolicy)
 		{
 			var myResults = _myDlcFinder.FindDlc(sourcePath);
 			if (myResults.Errors.Any())
 				return myResults.Errors;
 
-			return _myLoader.LoadDlcList(database, myResults, clearExistingItemsFirst);
+			return _myLoader.LoadDlcList(database, myResults, loadPolicy);
 		}
 	}
 }

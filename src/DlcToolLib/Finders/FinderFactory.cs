@@ -6,21 +6,27 @@ namespace DlcToolLib.Finders
 	public class FinderFactory
 	{
 		private const string OfficialDlcDefaultXpath = "//div[@class='tabPanel downloads']/songs";
+		private readonly IDlcSortCalculator _dlcSortCalculator;
+
+		public FinderFactory(IDlcSortCalculator dlcSortCalculator)
+		{
+			_dlcSortCalculator = dlcSortCalculator;
+		}
 
 		public OfficialDlcFinder GetDefaultOfficialDlcFinder()
 		{
 			var remapper = new OfficialDlcRemapper(new RemapOfficialEntries());
-			return new OfficialDlcFinder(remapper, OfficialDlcDefaultXpath);
+			return new OfficialDlcFinder(remapper, OfficialDlcDefaultXpath, _dlcSortCalculator);
 		}
 
-		public DlcTuningsDlcFinder GeDlcTuningsDlcFinder()
+		public DlcTuningsFinder GeDlcTuningsDlcFinder()
 		{
-			return new DlcTuningsDlcFinder();
+			return new DlcTuningsFinder(_dlcSortCalculator);
 		}
 
 		public ExistingDlcFinder GetExistingDlcFinder()
 		{
-			return new ExistingDlcFinder();
+			return new ExistingDlcFinder(_dlcSortCalculator);
 		}
 	}
 }

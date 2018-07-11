@@ -14,11 +14,13 @@ namespace DlcToolLib.Finders
 	{
 		private readonly OfficialDlcRemapper _dlcRemapper;
 		private readonly string _songsXPath;
+		private readonly IDlcSortCalculator _dlcSortCalculator;
 
-		public OfficialDlcFinder(OfficialDlcRemapper officialDlcRemapper, string songsXPath)
+		public OfficialDlcFinder(OfficialDlcRemapper officialDlcRemapper, string songsXPath, IDlcSortCalculator dlcSortCalculator)
 		{
 			_dlcRemapper = officialDlcRemapper;
 			_songsXPath = songsXPath;
+			_dlcSortCalculator = dlcSortCalculator;
 		}
 
 		public IFindDlcResult<OfficialDlcItem> FindDlc(string sourcePath)
@@ -73,6 +75,10 @@ namespace DlcToolLib.Finders
 				Year = GetField(dlcRow, "year"),
 				SongPack = GetField(dlcRow, "song-pack")
 			};
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
 
 			return rv;
 		}

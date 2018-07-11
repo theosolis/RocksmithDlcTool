@@ -14,6 +14,13 @@ namespace DlcToolLib.Finders
 {
 	public class ExistingDlcFinder : IDlcFinder<ExistingDlcItem>
 	{
+		private IDlcSortCalculator _dlcSortCalculator;
+
+		public ExistingDlcFinder(IDlcSortCalculator dlcSortCalculator)
+		{
+			_dlcSortCalculator = dlcSortCalculator;
+		}
+
 		public IFindDlcResult<ExistingDlcItem> FindDlc(string sourcePath)
 		{
 			var rv = new ExistingDlcList();
@@ -79,6 +86,11 @@ namespace DlcToolLib.Finders
 				DlcSource = DlcGameVersionType.Rs2014
 			};
 
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
+
 			return rv;
 		}
 
@@ -92,6 +104,11 @@ namespace DlcToolLib.Finders
 				Identifier = song.SongKey,
 				DlcSource = DlcGameVersionType.Rs1
 			};
+
+			var sortDetails = _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
+			rv.ArtistSort = sortDetails.ArtistSort;
+			rv.SongSort = sortDetails.SongSort;
+			rv.UniqueKey = sortDetails.UniqueKey;
 
 			return rv;
 		}

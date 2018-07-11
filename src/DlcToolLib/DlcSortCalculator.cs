@@ -12,7 +12,6 @@ namespace DlcToolLib
 	public interface IDlcSortCalculator
 	{
 		DlcSortDetails CreateSortDetails(IDlc dlc);
-		List<SortableItem<T>> ConstructSortableItemList<T>(IEnumerable<T> itemsToSort) where T : IDlc;
 	}
 
 	public class DlcSortCalculator : IDlcSortCalculator

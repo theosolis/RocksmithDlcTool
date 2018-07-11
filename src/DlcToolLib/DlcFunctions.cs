@@ -5,6 +5,8 @@ using DlcToolLib.Finders;
 using DlcToolLib.Model;
 using RocksmithToolkitLib.PsarcLoader;
 using System.Collections.Generic;
+using DlcToolLib.Loading;
+using LiteDB;
 
 namespace DlcToolLib
 {
@@ -35,14 +37,19 @@ namespace DlcToolLib
 			return dlcMatches;
 		}
 
-		public void LoadSourceToStore(string dbFile, string sourcePath, DlcSourceType sourceType, bool replaceExisting)
+		public List<string> LoadSourceToStore(string dbFile, string sourcePath, DlcSourceType sourceType, bool clearExistingItemsFirst)
 		{
-
+			using (var db = new LiteDatabase(dbFile))
+			{
+				var factory = LoadingOracle.GetDefaultLoadCoordinatorFactory();
+				var loadCoordinator = factory.CreateLoadCoordinator(sourceType);
+				return loadCoordinator.LoadSourceToDatabase(sourcePath, db, clearExistingItemsFirst);
+			}
 		}
 
 		private DlcTuningList GetTuningDlcList(string inputSource)
 		{
-			var dlcTuningsFinder = new DlcTuningsFinder();
+			var dlcTuningsFinder = new DlcTuningsDlcFinder();
 			var dlcTuningList = dlcTuningsFinder.GetDlcTuningList(inputSource);
 			return dlcTuningList;
 		}
@@ -57,9 +64,9 @@ namespace DlcToolLib
 		private OfficialDlcList GetOfficialDlcList(string officialDlcSource, string xpathSelector, RemapOfficialEntries remapOfficialEntries)
 		{
 			var officialDlcRemapper = new OfficialDlcRemapper(remapOfficialEntries);
-			var officialDlcFinder = new OfficialDlcFinder(officialDlcRemapper);
+			var officialDlcFinder = new OfficialDlcFinder(officialDlcRemapper, xpathSelector);
 			
-			return officialDlcFinder.GetOfficialDlcList(officialDlcSource, xpathSelector);
+			return officialDlcFinder.GetOfficialDlcList(officialDlcSource);
 		}
 	}
 }

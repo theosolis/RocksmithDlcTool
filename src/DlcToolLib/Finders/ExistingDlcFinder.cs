@@ -12,8 +12,18 @@ using RocksmithToolkitLib.DLCPackage.Manifest;
 
 namespace DlcToolLib.Finders
 {
-	public class ExistingDlcFinder
+	public class ExistingDlcFinder : IDlcFinder<ExistingDlcItem>
 	{
+		public IFindDlcResult<ExistingDlcItem> FindDlc(string sourcePath)
+		{
+			var rv = new ExistingDlcList();
+
+			rv.DlcList.AddRange(FindRocksmith2014(sourcePath));
+			rv.DlcList.AddRange(FindRocksmith1(sourcePath));
+
+			return rv;
+		}
+
 		public ExistingDlcList FindAllDlc(string rs2014DlcFolder, string rs1DlcFolder)
 		{
 			var rv = new ExistingDlcList();

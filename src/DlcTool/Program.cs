@@ -93,7 +93,7 @@ namespace DlcTool
 
 			p.Setup<string>("tunings")
 				.Callback(val => cmdLineArgs.TuningSource = val)
-				.WithDescription("RiffRepeater tunings list");
+				.WithDescription("DlcTuning tunings list");
 
 			p.SetupHelp("h", "help", "?")
 			.Callback(text => Console.WriteLine(text));

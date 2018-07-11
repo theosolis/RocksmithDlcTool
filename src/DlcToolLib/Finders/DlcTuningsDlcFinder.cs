@@ -8,13 +8,18 @@ using HtmlAgilityPack;
 
 namespace DlcToolLib.Finders
 {
-	public class DlcTuningsFinder
+	public class DlcTuningsDlcFinder : IDlcFinder<DlcTuningItem>
 	{
 		private const int DlcTableCellSong = 0;
 		private const int DlcTableCellArtist = 1;
 		private const int DlcTableCellLeadTuning = 2;
 		private const int DlcTableCellRhythmTuning = 3;
 		private const int DlcTableCellBassTuning = 4;
+
+		public IFindDlcResult<DlcTuningItem> FindDlc(string sourcePath)
+		{
+			return GetDlcTuningList(sourcePath);
+		}
 
 		public DlcTuningList GetDlcTuningList(string sourcePath)
 		{
@@ -40,7 +45,7 @@ namespace DlcToolLib.Finders
 				from dlcRow in value.SelectNodes("tbody/tr")
 				select MapToOfficialDlcItem(dlcRow);
 
-			//want unique per artist - currently the RiffRepeater page has duplicates in it!
+			//want unique per artist - currently the DlcTuning page has duplicates in it!
 			foreach (var artist in rawList.GroupBy(x => new {x.Artist, x.Song}))
 			{
 				rv.DlcList.Add(artist.First());

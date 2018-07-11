@@ -33,7 +33,7 @@ namespace DlcDatabase
 
 			p.Setup<DlcSourceType>('t', "type")
 			.Callback(sourceType => programArgs.SourceType = sourceType)
-			.WithDescription("Type of DLC source - Official, RiffRepeater, Existing, or Steam")
+			.WithDescription("Type of DLC source - Official, DlcTuning, Existing, or Steam")
 			.Required();
 
 			p.Setup<string>('d', "database")

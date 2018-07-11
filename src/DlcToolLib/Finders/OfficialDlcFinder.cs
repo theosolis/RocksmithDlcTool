@@ -10,19 +10,26 @@ using DlcToolLib.Model;
 
 namespace DlcToolLib.Finders
 {
-	public class OfficialDlcFinder
+	public class OfficialDlcFinder : IDlcFinder<OfficialDlcItem>
 	{
 		private readonly OfficialDlcRemapper _dlcRemapper;
+		private readonly string _songsXPath;
 
-		public OfficialDlcFinder(OfficialDlcRemapper officialDlcRemapper)
+		public OfficialDlcFinder(OfficialDlcRemapper officialDlcRemapper, string songsXPath)
 		{
 			_dlcRemapper = officialDlcRemapper;
+			_songsXPath = songsXPath;
 		}
 
-		public OfficialDlcList GetOfficialDlcList(string sourcePath, string songsXPath)
+		public IFindDlcResult<OfficialDlcItem> FindDlc(string sourcePath)
+		{
+			return GetOfficialDlcList(sourcePath);
+		}
+
+		public OfficialDlcList GetOfficialDlcList(string sourcePath)
 		{
 			var doc = DlcHelper.GetHtmlDocument(sourcePath);
-			return ParsePage(doc, songsXPath);
+			return ParsePage(doc, _songsXPath);
 		}
 
 

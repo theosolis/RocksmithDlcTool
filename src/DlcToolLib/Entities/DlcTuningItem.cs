@@ -1,6 +1,6 @@
 ﻿namespace DlcToolLib.Entities
 {
-	public class DlcTuningItem : IDlc
+	public class DlcTuningItem : BaseEntity, IDlc
 	{
 		public const string TableName = "dlctuningitem";
 

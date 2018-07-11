@@ -80,7 +80,9 @@
     <Compile Include="DlcListWriter.cs" />
     <Compile Include="DlcMatchCalculator.cs" />
     <Compile Include="DlcSortCalculator.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\DlcSourceType.cs" />
+    <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Finders\DlcTuningsFinder.cs" />
     <Compile Include="Finders\ExistingDlcFinder.cs" />
     <Compile Include="DlcFunctions.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace DlcToolLib.Entities
 {
-	public class OfficialDlcItem : IDlc
+	public class OfficialDlcItem : BaseEntity, IDlc
 	{
 		public const string TableName = "officialdlc";
 

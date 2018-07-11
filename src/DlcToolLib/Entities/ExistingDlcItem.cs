@@ -6,7 +6,7 @@
 		Rs2014
 	}
 
-	public class ExistingDlcItem : IDlc
+	public class ExistingDlcItem : BaseEntity, IDlc
 	{
 		public const string TableName = "existingdlcitem";
 

@@ -89,6 +89,7 @@
     <Compile Include="DlcFunctions.cs" />
     <Compile Include="Finders\FinderFactory.cs" />
     <Compile Include="Finders\IDlcFinder.cs" />
+    <Compile Include="Finders\SteamDlcFinder.cs" />
     <Compile Include="Loading\GenericDlcLoader.cs" />
     <Compile Include="Loading\GenericLoadCoordinator.cs" />
     <Compile Include="Loading\IDlcLoader.cs" />
@@ -114,10 +115,13 @@
     <Compile Include="Model\RemapOfficialEntries.cs" />
     <Compile Include="Model\SongPack.cs" />
     <Compile Include="Finders\OfficialDlcFinder.cs" />
+    <Compile Include="Model\SteamSongPack.cs" />
     <Compile Include="OfficialDlcRemapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SongPackDescriptionParser.cs" />
     <Compile Include="StringCleaner.cs" />
     <Compile Include="UnitTests\TestOfficialDlcRemapper.cs" />
+    <Compile Include="UnitTests\TestSongPackDescriptionParser.cs" />
     <Compile Include="UnitTests\TestStringCleaner.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@ using DlcToolLib.Finders;
 using DlcToolLib.Model;
 using RocksmithToolkitLib.PsarcLoader;
 using System.Collections.Generic;
+using System.Linq;
 using DlcToolLib.Loading;
 using LiteDB;
 
@@ -44,6 +45,59 @@ namespace DlcToolLib
 				var factory = LoadingOracle.GetDefaultLoadCoordinatorFactory();
 				var loadCoordinator = factory.CreateLoadCoordinator(sourceType);
 				return loadCoordinator.LoadSourceToDatabase(sourcePath, db, loadPolicy);
+			}
+		}
+
+		public void AttemptLinking()
+		{
+			using (var db = new LiteDatabase(@"h:\temp\test.db"))
+			{
+				var officialDlcCol = db.GetCollection<OfficialDlcItem>(OfficialDlcItem.TableName);
+				var existingDlcCol = db.GetCollection<ExistingDlcItem>(ExistingDlcItem.TableName);
+				var tuningDlcCol = db.GetCollection<DlcTuningItem>(DlcTuningItem.TableName);
+				var linksCol = db.GetCollection<LinksBetweenDlcSources>();
+
+				var existingByKey = existingDlcCol.FindAll().ToDictionary(x => x.UniqueKey);
+				var tuningDlcByKey = tuningDlcCol.FindAll().ToDictionary(x => x.UniqueKey);
+
+				foreach (var item in officialDlcCol.FindAll())
+				{
+					var newLink = new LinksBetweenDlcSources {OfficialDlcItem = item};
+
+					if (existingByKey.ContainsKey(item.UniqueKey))
+					{
+						newLink.ExistingDlcItem = existingByKey[item.UniqueKey];
+						existingByKey.Remove(item.UniqueKey);
+					}
+
+					if (tuningDlcByKey.ContainsKey(item.UniqueKey))
+					{
+						newLink.DlcTuningItem = tuningDlcByKey[item.UniqueKey];
+						tuningDlcByKey.Remove(item.UniqueKey);
+					}
+
+					linksCol.Insert(newLink);
+				}
+
+				foreach (var unmatchedExisting in existingByKey)
+				{
+					var newLink = new LinksBetweenDlcSources {ExistingDlcItem = unmatchedExisting.Value};
+
+					if (tuningDlcByKey.ContainsKey(unmatchedExisting.Key))
+					{
+						newLink.DlcTuningItem = tuningDlcByKey[unmatchedExisting.Key];
+						tuningDlcByKey.Remove(unmatchedExisting.Key);
+					}
+
+					linksCol.Insert(newLink);
+				}
+
+				foreach (var unmatchedTuningItem in tuningDlcByKey)
+				{
+					var newLink = new LinksBetweenDlcSources { DlcTuningItem = unmatchedTuningItem.Value };
+
+					linksCol.Insert(newLink);
+				}
 			}
 		}
 

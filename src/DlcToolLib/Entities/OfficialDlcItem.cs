@@ -4,7 +4,6 @@
 	{
 		public const string TableName = "officialdlc";
 
-		public int Id { get; set; }
 		public string UniqueKey { get; set; }
 		public string Artist { get; set; }
 		public string ArtistSort { get; set; }

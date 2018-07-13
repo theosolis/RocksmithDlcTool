@@ -19,6 +19,8 @@ namespace DlcDatabase
 			if (programArgs == null) return;
 
 			var dlcFuncs = new DlcFunctions();
+			//dlcFuncs.AttemptLinking();
+			//return;
 			var loadPolicy = new DlcLoadPolicy
 			{
 				AddNewItems = programArgs.AddNewRows,

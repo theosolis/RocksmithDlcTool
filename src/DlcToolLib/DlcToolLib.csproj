@@ -117,6 +117,7 @@
     <Compile Include="Model\SongPack.cs" />
     <Compile Include="Finders\OfficialDlcFinder.cs" />
     <Compile Include="Model\SteamDlcDescription.cs" />
+    <Compile Include="Model\SteamDlcList.cs" />
     <Compile Include="Model\SteamSongPack.cs" />
     <Compile Include="OfficialDlcRemapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

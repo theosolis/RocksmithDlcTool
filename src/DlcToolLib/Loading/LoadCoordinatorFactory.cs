@@ -25,6 +25,9 @@ namespace DlcToolLib.Loading
 
 				case DlcSourceType.Purchased:
 					return CreatePurchasedDlcCoordinator();
+
+				case DlcSourceType.Steam:
+					return CreateSteamDlcCoordinator();
 			}
 
 			throw new ApplicationException("Unsupported source type " + sourceType);
@@ -55,14 +58,6 @@ namespace DlcToolLib.Loading
 			return new GenericLoadCoordinator<DlcTuningItem>(myFinder, myLoader);
 		}
 
-		private void SetCommonDlcFieldsForUpdate(IDlc target, IDlc source)
-		{
-			target.Artist = source.Artist;
-			target.ArtistSort = source.ArtistSort;
-			target.Song = source.Song;
-			target.SongSort = source.SongSort;
-		}
-
 		private bool UpdateDlcTuningRow(DlcTuningItem target, DlcTuningItem source)
 		{
 			SetCommonDlcFieldsForUpdate(target, source);
@@ -90,6 +85,31 @@ namespace DlcToolLib.Loading
 			target.PathToFile = source.PathToFile;
 
 			return true;
+		}
+
+		private ILoadCoordinator CreateSteamDlcCoordinator()
+		{
+			var myFinder = _finderFactory.GetSteamDlcFinder();
+			var myLoader = new GenericDlcLoader<SteamDlcItem>(SteamDlcItem.TableName, UpdateSteamDlcItemRow);
+
+			return new GenericLoadCoordinator<SteamDlcItem>(myFinder, myLoader);
+		}
+
+		private bool UpdateSteamDlcItemRow(SteamDlcItem target, SteamDlcItem source)
+		{
+			SetCommonDlcFieldsForUpdate(target, source);
+
+			target.DlcPageUrl = source.DlcPageUrl;
+
+			return true;
+		}
+
+		private void SetCommonDlcFieldsForUpdate(IDlc target, IDlc source)
+		{
+			target.Artist = source.Artist;
+			target.ArtistSort = source.ArtistSort;
+			target.Song = source.Song;
+			target.SongSort = source.SongSort;
 		}
 	}
 }

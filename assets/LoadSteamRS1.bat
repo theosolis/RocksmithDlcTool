@@ -1,0 +1,1 @@
+..\src\DlcDatabase\bin\Debug\DlcDatabase.exe --type Steam --source H:\src\RocksmithDlcTool\assets\steam_rs1_dlc.html --database h:\temp\test.db --update false --addnew true

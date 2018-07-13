@@ -50,7 +50,7 @@ namespace DlcToolLib.Finders
 
 			var rawList =
 				from dlcRow in value.SelectNodes("tbody/tr")
-				select MapToOfficialDlcItem(dlcRow);
+				select MapToDlcTuningItem(dlcRow);
 
 			//want unique per artist - currently the DlcTuning page has duplicates in it!
 			foreach (var artist in rawList.GroupBy(x => new {x.Artist, x.Song}))
@@ -60,7 +60,7 @@ namespace DlcToolLib.Finders
 			return rv;
 		}
 
-		private DlcTuningItem MapToOfficialDlcItem(HtmlNode dlcRow)
+		private DlcTuningItem MapToDlcTuningItem(HtmlNode dlcRow)
 		{
 			var tableCells = dlcRow.ChildNodes.Where(x => x.Name == "td").ToList();
 			var rv = new DlcTuningItem

@@ -46,7 +46,7 @@ namespace DlcToolLib
 			*/
 			var match = Regex.Match(s, SongRegex);
 			if (!match.Success)
-				return new SteamDlcDescription {ParsedSuccessfully = true};
+				return new SteamDlcDescription {ParsedSuccessfully = true, Artist = s, SongName = s, SongPack = string.Empty};
 
 			return new SteamDlcDescription
 			{

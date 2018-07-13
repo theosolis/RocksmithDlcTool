@@ -13,6 +13,7 @@ namespace DlcToolLib
 	{
 		DlcSortDetails CreateSortDetails(IDlc dlc);
 		DlcSortDetails CreateSortDetails(string artistName, string song);
+		DlcSortDetails CreateSortDetailsForSongPack(string songPack);
 	}
 
 	public static class DlcSortCalculatorOracle
@@ -45,6 +46,20 @@ namespace DlcToolLib
 			var artistSort = _stringCleaner.MakeArtistSortName(artist);
 			var songSort = _stringCleaner.MakeSongSortName(song);
 			var uniqueKey = GetUniqueKey(artistSort, songSort);
+
+			return new DlcSortDetails
+			{
+				UniqueKey = uniqueKey,
+				ArtistSort = artistSort,
+				SongSort = songSort
+			};
+		}
+
+		public DlcSortDetails CreateSortDetailsForSongPack(string songPack)
+		{
+			var artistSort = _stringCleaner.MakeArtistSortName(songPack);
+			var songSort = _stringCleaner.MakeSongSortName(songPack);
+			var uniqueKey = GetUniqueKey("_SongPack_", songSort);
 
 			return new DlcSortDetails
 			{

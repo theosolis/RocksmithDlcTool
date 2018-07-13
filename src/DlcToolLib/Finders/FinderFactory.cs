@@ -28,5 +28,10 @@ namespace DlcToolLib.Finders
 		{
 			return new ExistingDlcFinder(_dlcSortCalculator);
 		}
+
+		public SteamDlcFinder GetSteamDlcFinder()
+		{
+			return new SteamDlcFinder(_dlcSortCalculator);
+		}
 	}
 }

@@ -186,5 +186,17 @@ namespace DlcToolLib.UnitTests
 			result.Artist.ShouldBe("Cinderella");
 			result.SongName.ShouldBe("Nobody’s Fool");
 		}
+
+		[Test]
+		public void IfRocksmith2014SongNameWithoutArtistOrPackThenParses()
+		{
+			var sut = new SteamDlcDescriptionParser();
+			var result = sut.ParseDlcLinkText("Rocksmith® 2014 – Bachsmith");
+			result.ShouldNotBeNull();
+			result.ParsedSuccessfully.ShouldBe(true);
+			result.SongPack.ShouldBeEmpty();
+			result.Artist.ShouldBe("Bachsmith");
+			result.SongName.ShouldBe("Bachsmith");
+		}
 	}
 }

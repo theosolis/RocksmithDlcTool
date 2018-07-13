@@ -8,7 +8,7 @@ using Microsoft.Win32;
 
 namespace DlcToolLib
 {
-	public class SongPackDescriptionParser
+	public class SteamSongPackParser
 	{
 		private const string SongPackSongFinderRegex = @"Play\s(.*)\son any electric guitar or bass";
 

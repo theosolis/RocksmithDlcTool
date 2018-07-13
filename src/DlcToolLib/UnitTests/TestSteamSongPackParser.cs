@@ -4,7 +4,7 @@ using Shouldly;
 namespace DlcToolLib.UnitTests
 {
 	[TestFixture]
-	public class TestSongPackDescriptionParser
+	public class TestSteamSongPackParser
 	{
 		private const string SingleArtist3PackDesc =
 			@"Play ""Remedy"", ""Fake It"", and ""Broken"" by Seether on any electric guitar or bass. Each song includes a new authentic tone.";
@@ -34,7 +34,7 @@ namespace DlcToolLib.UnitTests
 		[Test]
 		public void IfInputMatchesSingleArtist3PackThenOutputIsCorrect()
 		{
-			var sut = new SongPackDescriptionParser();
+			var sut = new SteamSongPackParser();
 			var result = sut.ParseSteamString(SingleArtist3PackDesc);
 
 			result.Parsing.ShouldBe(SingleArtist3PackDescParsing);
@@ -53,7 +53,7 @@ namespace DlcToolLib.UnitTests
 		[Test]
 		public void IfInputMatchesMultiPackNoArtistThenParsingSubstringIsCorrect()
 		{
-			var sut = new SongPackDescriptionParser();
+			var sut = new SteamSongPackParser();
 			var result = sut.ParseSteamString(MultiPackNoArtistDesc);
 
 			result.Parsing.ShouldBe(MultiPackNoArtistDescParsing);
@@ -73,7 +73,7 @@ namespace DlcToolLib.UnitTests
 		[Test]
 		public void IfInputMatchesBigSingleArtistPackThenParsingSubstringIsCorrect()
 		{
-			var sut = new SongPackDescriptionParser();
+			var sut = new SteamSongPackParser();
 			var result = sut.ParseSteamString(BigSingleArtistPackDesc);
 
 			result.Parsing.ShouldBe(BigSingleArtistPackDescParsing);
@@ -98,7 +98,7 @@ namespace DlcToolLib.UnitTests
 		[Test]
 		public void IfInputMatchesMultiPackWithArtistsThenParsingSubstringIsCorrect()
 		{
-			var sut = new SongPackDescriptionParser();
+			var sut = new SteamSongPackParser();
 			var result = sut.ParseSteamString(MultiPackWithArtistsDesc);
 
 			result.Parsing.ShouldBe(MultiPackWithArtistsDescParsing);
@@ -118,7 +118,7 @@ namespace DlcToolLib.UnitTests
 		[Test]
 		public void IfInputDoesNotMatchThenParsingSubstringIsEmpty()
 		{
-			var sut = new SongPackDescriptionParser();
+			var sut = new SteamSongPackParser();
 			var result = sut.ParseSteamString("Play This is a test string “Little Green Bag” by George Baker Selection");
 
 			result.Parsing.ShouldBe(string.Empty);
@@ -127,7 +127,7 @@ namespace DlcToolLib.UnitTests
 		[Test]
 		public void IfBadPartialMatchThenNoExceptions()
 		{
-			var sut = new SongPackDescriptionParser();
+			var sut = new SteamSongPackParser();
 			var result = sut.ParseSteamString(BadlyFormattedDesc);
 			result.Parsing.ShouldBe("\"");
 			result.SongsFound.Count.ShouldBe(0);
@@ -136,7 +136,7 @@ namespace DlcToolLib.UnitTests
 		[Test]
 		public void IfInputContainsLotsOfDelimitersParsingSucceeds()
 		{
-			var sut = new SongPackDescriptionParser();
+			var sut = new SteamSongPackParser();
 			var result = sut.ParseSteamString(@"Play ""do, da do, dah day"" by silly ben, and friends, and others, ""freedom"" by george michael, and ""benny and the jets"" by the one and only elton john on any electric guitar or bass. Each song includes a new authentic tone.");
 			result.Parsing.ShouldBe(@"""do, da do, dah day"" by silly ben, and friends, and others, ""freedom"" by george michael, and ""benny and the jets"" by the one and only elton john");
 			result.SongsFound.Count.ShouldBe(3);

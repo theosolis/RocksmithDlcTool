@@ -84,6 +84,7 @@
     <Compile Include="Entities\DlcSourceType.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Entities\LinksBetweenDlcSources.cs" />
+    <Compile Include="Entities\SteamDlcItem.cs" />
     <Compile Include="Finders\DlcTuningsFinder.cs" />
     <Compile Include="Finders\ExistingDlcFinder.cs" />
     <Compile Include="DlcFunctions.cs" />
@@ -115,13 +116,16 @@
     <Compile Include="Model\RemapOfficialEntries.cs" />
     <Compile Include="Model\SongPack.cs" />
     <Compile Include="Finders\OfficialDlcFinder.cs" />
+    <Compile Include="Model\SteamDlcDescription.cs" />
     <Compile Include="Model\SteamSongPack.cs" />
     <Compile Include="OfficialDlcRemapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SongPackDescriptionParser.cs" />
+    <Compile Include="SteamDlcDescriptionParser.cs" />
+    <Compile Include="SteamSongPackParser.cs" />
     <Compile Include="StringCleaner.cs" />
     <Compile Include="UnitTests\TestOfficialDlcRemapper.cs" />
-    <Compile Include="UnitTests\TestSongPackDescriptionParser.cs" />
+    <Compile Include="UnitTests\TestSteamDlcDescriptionParser.cs" />
+    <Compile Include="UnitTests\TestSteamSongPackParser.cs" />
     <Compile Include="UnitTests\TestStringCleaner.cs" />
   </ItemGroup>
   <ItemGroup>

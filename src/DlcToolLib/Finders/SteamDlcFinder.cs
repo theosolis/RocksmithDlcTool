@@ -36,14 +36,12 @@ namespace DlcToolLib.Finders
 				return rv;
 			}
 
-			//var restOfList = value.SelectSingleNode("//div[@id='game_area_dlc_expanded']").SelectNodes("a");
-			
 			var aNodes = value.SelectNodes("a").ToList();
 			aNodes.AddRange(doc.DocumentNode.SelectSingleNode("//div[@id='game_area_dlc_expanded']").SelectNodes("a"));
 
 			var theList = aNodes.Select(MapToSteamDlcItem).Where(x => x != null).ToList();
 			Console.WriteLine($"Found {theList.Count} steam items");
-			Console.WriteLine($"...of which {theList.Count(x => x.ThisIsASongPackEntry)} are song packs");
+			Console.WriteLine($"...of which {theList.Count(x => x.ItemType == SteamDlcItemType.SongPack)} are song packs");
 			rv.DlcList.AddRange(theList);
 			return rv;
 		}
@@ -75,11 +73,10 @@ namespace DlcToolLib.Finders
 			};
 			if (!string.IsNullOrWhiteSpace(rv.SongPack))
 			{
-				rv.SongPackUrl = dlcUrl;
-				rv.ThisIsASongPackEntry = true;
+				rv.ItemType = SteamDlcItemType.SongPack;
 			}
 
-			var sortDetails = rv.ThisIsASongPackEntry
+			var sortDetails = rv.ItemType == SteamDlcItemType.SongPack
 				? _dlcSortCalculator.CreateSortDetailsForSongPack(rv.SongPack)
 				: _dlcSortCalculator.CreateSortDetails(rv.Artist, rv.Song);
 

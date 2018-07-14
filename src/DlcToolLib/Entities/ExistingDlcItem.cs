@@ -1,10 +1,6 @@
 ﻿namespace DlcToolLib.Entities
 {
-	public enum DlcGameVersionType
-	{
-		Rs1,
-		Rs2014
-	}
+
 
 	public class ExistingDlcItem : BaseEntity, IDlc
 	{

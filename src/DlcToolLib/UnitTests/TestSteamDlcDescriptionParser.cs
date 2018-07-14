@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using DlcToolLib.Entities;
+using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Shouldly;
 
@@ -7,6 +8,12 @@ namespace DlcToolLib.UnitTests
 	[TestFixture]
 	public class TestSteamDlcDescriptionParser
 	{
+		[Test]
+		public void IfRocksmithSaverPackThenParses()
+		{
+
+		}
+
 		[Test]
 		public void IfRocksmithSingleSongThenParses()
 		{
@@ -17,6 +24,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Pantera");
 			result.SongName.ShouldBe("Cowboys From Hell");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs1);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -29,6 +38,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Fall Out Boy");
 			result.SongName.ShouldBe("Dance, Dance");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs1);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -41,6 +52,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Blue Oyster Cult");
 			result.SongName.ShouldBe("Burnin' for You");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs1);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -53,6 +66,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("blink-182");
 			result.SongName.ShouldBe("What's My Age Again?");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs1);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -65,6 +80,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBe("Allman Brothers Band Song Pack");
 			result.Artist.ShouldBeEmpty();
 			result.SongName.ShouldBeEmpty();
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs1);
+			result.ItemType.ShouldBe(SteamDlcItemType.SongPack);
 		}
 
 		[Test]
@@ -77,6 +94,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBe("Nickelback - 3 Song Pack");
 			result.Artist.ShouldBeEmpty();
 			result.SongName.ShouldBeEmpty();
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs1);
+			result.ItemType.ShouldBe(SteamDlcItemType.SongPack);
 		}
 
 		[Test]
@@ -89,6 +108,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBe("blink-182 - 3-Song Pack");
 			result.Artist.ShouldBeEmpty();
 			result.SongName.ShouldBeEmpty();
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs1);
+			result.ItemType.ShouldBe(SteamDlcItemType.SongPack);
 		}
 
 		[Test]
@@ -101,6 +122,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Dio");
 			result.SongName.ShouldBe("Holy Diver");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -113,6 +136,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Tom Petty and the Heartbreakers");
 			result.SongName.ShouldBe("Learning to Fly");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -125,6 +150,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("The White Stripes");
 			result.SongName.ShouldBe("You Don’t Know What Love Is (You Just Do As You’re Told)");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -137,6 +164,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBe("Bullet For My Valentine Song Pack");
 			result.Artist.ShouldBeEmpty();
 			result.SongName.ShouldBeEmpty();
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.SongPack);
 		}
 
 		[Test]
@@ -149,6 +178,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBe("Stevie Ray Vaughan & Double Trouble Song Pack");
 			result.Artist.ShouldBeEmpty();
 			result.SongName.ShouldBeEmpty();
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.SongPack);
 		}
 
 		[Test]
@@ -161,6 +192,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Yes");
 			result.SongName.ShouldBe("I’ve Seen All Good People");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -173,6 +206,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Panic! At The Disco");
 			result.SongName.ShouldBe("Ballad of Mona Lisa");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -185,6 +220,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Cinderella");
 			result.SongName.ShouldBe("Nobody’s Fool");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 
 		[Test]
@@ -197,6 +234,8 @@ namespace DlcToolLib.UnitTests
 			result.SongPack.ShouldBeEmpty();
 			result.Artist.ShouldBe("Bachsmith");
 			result.SongName.ShouldBe("Bachsmith");
+			result.GameVersion.ShouldBe(DlcGameVersionType.Rs2014);
+			result.ItemType.ShouldBe(SteamDlcItemType.Song);
 		}
 	}
 }
